@@ -1,5 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 
+export const runtime = "edge";
+
 const DAILY_FREE_LIMIT = 3;
 const COOKIE_NAME = "bg_usage";
 

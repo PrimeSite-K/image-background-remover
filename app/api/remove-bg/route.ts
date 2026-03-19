@@ -1,18 +1,23 @@
 import { NextRequest, NextResponse } from "next/server";
 
+export const runtime = "edge";
+
 const REMOVE_BG_API_KEY = process.env.REMOVE_BG_API_KEY!;
 
 export async function POST(req: NextRequest) {
   try {
     const { imageBase64, mimeType } = await req.json();
-
     if (!imageBase64) {
       return NextResponse.json({ error: "No image data" }, { status: 400 });
     }
 
-    // Convert base64 to buffer
-    const imageBuffer = Buffer.from(imageBase64, "base64");
-    const blob = new Blob([imageBuffer], { type: mimeType || "image/jpeg" });
+    // Convert base64 to Uint8Array (Edge compatible, no Buffer)
+    const binaryStr = atob(imageBase64);
+    const bytes = new Uint8Array(binaryStr.length);
+    for (let i = 0; i < binaryStr.length; i++) {
+      bytes[i] = binaryStr.charCodeAt(i);
+    }
+    const blob = new Blob([bytes], { type: mimeType || "image/jpeg" });
 
     const body = new FormData();
     body.append("image_file", blob, "image.jpg");
@@ -30,7 +35,14 @@ export async function POST(req: NextRequest) {
     }
 
     const resultBuffer = await resp.arrayBuffer();
-    const resultBase64 = Buffer.from(resultBuffer).toString("base64");
+
+    // Convert to base64 (Edge compatible)
+    const resultBytes = new Uint8Array(resultBuffer);
+    let binary = "";
+    for (let i = 0; i < resultBytes.length; i++) {
+      binary += String.fromCharCode(resultBytes[i]);
+    }
+    const resultBase64 = btoa(binary);
 
     return NextResponse.json({ resultBase64 });
   } catch (e: any) {
