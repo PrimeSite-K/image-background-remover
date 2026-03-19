@@ -2,12 +2,12 @@
   "type": "Prerender",
   "expiration": false,
   "sourcePath": "/",
-  "group": 3,
-  "bypassToken": "e0ff1ffef9d1cebc2ba1dedaed67a9c2",
+  "group": 2,
+  "bypassToken": "b7aeb0dc93668155e3328e3aee355d7f",
   "experimentalBypassFor": [
     {
       "type": "header",
-      "key": "next-action"
+      "key": "Next-Action"
     },
     {
       "type": "header",
@@ -21,10 +21,10 @@
     "fsPath": "index.prerender-fallback.html"
   },
   "initialHeaders": {
-    "x-nextjs-stale-time": "300",
+    "x-nextjs-stale-time": "4294967294",
     "x-nextjs-prerender": "1",
     "x-next-cache-tags": "_N_T_/layout,_N_T_/page,_N_T_/",
-    "vary": "rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch"
+    "vary": "RSC, Next-Router-State-Tree, Next-Router-Prefetch, Next-Router-Segment-Prefetch"
   },
   "allowQuery": [],
   "allowHeader": [

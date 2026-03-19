@@ -7,15 +7,14 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "pages:build": "npx @cloudflare/next-on-pages",
-    "deploy": "npm run pages:build && wrangler pages deploy .vercel/output/static --project-name image-background-remover"
+    "pages:build": "next build && rm -rf .next/cache",
+    "deploy": "npm run pages:build && npx @cloudflare/next-on-pages && wrangler pages deploy .vercel/output/static --project-name image-background-remover"
   },
   "dependencies": {
     "@stripe/stripe-js": "^8.11.0",
-    "next": "^15.5.2",
-    "react": "19.2.4",
-    "react-dom": "19.2.4",
-    "stripe": "^20.4.1"
+    "next": "^15.2.4",
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4"
   },
   "devDependencies": {
     "@cloudflare/next-on-pages": "^1.13.16",

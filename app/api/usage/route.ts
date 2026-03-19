@@ -6,7 +6,7 @@ const DAILY_FREE_LIMIT = 3;
 const COOKIE_NAME = "bg_usage";
 
 function getTodayKey() {
-  return new Date().toISOString().slice(0, 10); // "2026-03-19"
+  return new Date().toISOString().slice(0, 10);
 }
 
 function parseUsage(cookie: string | undefined): { date: string; count: number } {
@@ -20,7 +20,6 @@ function parseUsage(cookie: string | undefined): { date: string; count: number }
   }
 }
 
-// GET /api/usage — check remaining quota
 export async function GET(req: NextRequest) {
   const cookie = req.cookies.get(COOKIE_NAME)?.value;
   const usage = parseUsage(cookie);
@@ -28,7 +27,6 @@ export async function GET(req: NextRequest) {
   return NextResponse.json({ remaining, limit: DAILY_FREE_LIMIT, used: usage.count });
 }
 
-// POST /api/usage — increment usage, returns new remaining
 export async function POST(req: NextRequest) {
   const cookie = req.cookies.get(COOKIE_NAME)?.value;
   const usage = parseUsage(cookie);
@@ -44,7 +42,7 @@ export async function POST(req: NextRequest) {
   res.cookies.set(COOKIE_NAME, btoa(JSON.stringify(usage)), {
     httpOnly: true,
     sameSite: "lax",
-    maxAge: 60 * 60 * 24 * 2, // 2 days
+    maxAge: 60 * 60 * 24 * 2,
     path: "/",
   });
   return res;

@@ -1,0 +1,10 @@
+name = "image-background-remover"
+compatibility_date = "2024-09-23"
+compatibility_flags = ["nodejs_compat"]
+pages_build_output_dir = ".vercel/output/static"
+
+[vars]
+REMOVE_BG_API_KEY = "Dqv5qnv5LMgEdoK7iNmpfbeY"
+STRIPE_SECRET_KEY = "sk_test_placeholder"
+STRIPE_PRICE_ID = "price_placeholder"
+STRIPE_WEBHOOK_SECRET = "whsec_placeholder"

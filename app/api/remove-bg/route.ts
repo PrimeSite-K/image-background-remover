@@ -11,7 +11,6 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "No image data" }, { status: 400 });
     }
 
-    // Convert base64 to Uint8Array (Edge compatible, no Buffer)
     const binaryStr = atob(imageBase64);
     const bytes = new Uint8Array(binaryStr.length);
     for (let i = 0; i < binaryStr.length; i++) {
@@ -35,8 +34,6 @@ export async function POST(req: NextRequest) {
     }
 
     const resultBuffer = await resp.arrayBuffer();
-
-    // Convert to base64 (Edge compatible)
     const resultBytes = new Uint8Array(resultBuffer);
     let binary = "";
     for (let i = 0; i < resultBytes.length; i++) {
