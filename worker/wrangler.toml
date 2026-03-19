@@ -1,0 +1,8 @@
+name = "bg-remover-worker"
+main = "index.ts"
+compatibility_date = "2024-01-01"
+
+[vars]
+ALLOWED_ORIGIN = "https://your-site.pages.dev"
+
+# Set secret via: wrangler secret put REMOVE_BG_API_KEY
